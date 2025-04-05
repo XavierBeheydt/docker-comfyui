@@ -7,11 +7,12 @@
 
 **v0.1.1**
 
-- [] Add an overview for Docker HUB
-- [] Create version for AMD and INTEL
-- [] Add previous version of ComfyUI
-- [] Create a Makefile
+- [x] Add an overview for Docker HUB
+ - [ ] Use README for an overview
+- [ ] Create version for AMD and INTEL
+- [ ] Add previous version of ComfyUI
+- [ ] Create a Makefile
 
 **v1.0.0**
 
-- [] lightened the image
+- [ ] lightened the image
