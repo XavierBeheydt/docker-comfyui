@@ -10,3 +10,8 @@
 - [] Add an overview for Docker HUB
 - [] Create version for AMD and INTEL
 - [] Add previous version of ComfyUI
+- [] Create a Makefile
+
+**v1.0.0**
+
+- [] lightened the image
