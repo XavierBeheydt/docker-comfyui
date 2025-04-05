@@ -32,3 +32,4 @@ docker run -p 8188:8188 --gpus all -it --rm xavierbeheydt/docker-comfyui:latest
 ## Links
 
 - [Docker HUB](https://hub.docker.com/repository/docker/xavierbeheydt/docker-comfyui)
+- [GitHub repo](https://github.com/XavierBeheydt/docker-comfyui)
