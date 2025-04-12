@@ -11,22 +11,16 @@ git clone https://github.com/XavierBeheydt/docker-comfyui
 cd docker-comfyui
 ```
 
-**Pull fronm Docker HUB**
+**Run the services**
 
 ```bash
-docker pull xavierbeheydt/docker-comfyui:<tag>
+make up
 ```
 
-**Building the image**
+**Install ComfyUI manager**
 
 ```bash
-docker build .
-```
-
-**Run the image**
-
-```bash
-docker run -p 8188:8188 --gpus all -it --rm xavierbeheydt/docker-comfyui:latest
+make install/manager restart
 ```
 
 ## Links
