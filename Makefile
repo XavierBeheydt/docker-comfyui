@@ -14,48 +14,47 @@ DOCKER			= docker
 COMPOSE			= $(DOCKER) compose
 
 # Variables ====================================================================
-PROJECT_NAME 	?= docker-comfyui
-CONTAINER_NAME	?= comfyui
-TAG				?= latest
-SERVICES 		?= comfyui
-PORT			?= 8188
+PROJECT_NAME 	?= comfyui
+SERVICES 		?= app
+
+COMPOSE_FILES	?= -f docker-compose.yml
 
 # Receipes =====================================================================
 .PHONY: all
-all: run
+all: up start
 
 .PHONY: info
 info:  ## Print selected services
 	@echo Services selected : ${SERVICES}
 
-.PHONY: run
-run:  ## Run the service
-run: info
-	$(DOCKER) run -d\
-		--gpus all \
-		-p ${PORT}:8188 \
-		-v ${COMFYUI_INPUT}:/comfyui/input \
-		-v ${COMFYUI_OUTPUT}:/comfyui/output \
-		-v ${COMFYUI_MODELS}:/comfyui/models \
-		--name ${CONTAINER_NAME} \
-		xavierbeheydt/docker-comfyui:${TAG}
+.PHONY: up
+up:  ## Up all services
+up: info
+	$(COMPOSE) ${COMPOSE_FILES} up -d ${SERVICES}
+
+.PHONY: down
+down:  ## Down all services
+down: info
+	$(COMPOSE) ${COMPOSE_FILES} down ${SERVICES}
 
 .PHONY: start
-start:  ## Start the service
+start:  ## Start all services
 start: info
-	$(DOCKER) start ${CONTAINER_NAME}
+	$(COMPOSE) ${COMPOSE_FILES} start ${SERVICES}
 
 .PHONY: stop
-stop:  ## Stop the service
+stop:  ## Stop all services
 stop: info
-	$(DOCKER) stop ${CONTAINER_NAME}
+	$(COMPOSE) ${COMPOSE_FILES} stop ${SERVICES}
+
+.PHONY: restart 
+restart: stop start
 
 .PHONY: logs
 logs:  ## Logs containers in the stack.
 logs: info
-	$(DOCKER) logs -f ${CONTAINER_NAME}
+	$(COMPOSE) ${COMPOSE_FILES} logs -f ${SERVICES}
 
-.PHONY: rm
-rm:  ## Remove the container
-rm: stop
-	$(DOCKER) rm ${CONTAINER_NAME}
+.PHONY: install/manager
+install/manager:
+	$(COMPOSE) exec app git clone https://github.com/ltdrdata/ComfyUI-Manager /comfyui/custom_nodes/comfyui-manager
