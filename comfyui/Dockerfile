@@ -16,5 +16,6 @@ RUN pip install -r temp_requirements.txt
 EXPOSE ${DEFAULT_PORT}
 
 VOLUME /${APP_DIR}/models
+VOLUME /${APP_DIR}/custom_nodes
 
 ENTRYPOINT ["python", "main.py", "--listen"]
