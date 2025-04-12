@@ -1,0 +1,28 @@
+# Project: docker-comfyui
+# Reworked by: Copyright Xavier Beheydt. All rights reserved.
+
+name: comfyui
+
+networks:
+  frontend:
+
+
+volumes:
+  custom_nodes:
+
+
+services:
+  app:
+    image: xavierbeheydt/docker-comfyui:latest
+    gpus: all
+    env_file:
+      - .env
+    volumes:
+      - custom_nodes:/comfyui/custom_nodes
+      - ${COMFYUI_INPUT}:/comfyui/input
+      - ${COMFYUI_OUTPUT}:/comfyui/output
+      - ${COMFYUI_MODELS}:/comfyui/models
+    ports:
+      - ${COMFYUI_PORT}:8188
+    networks:
+      - frontend
